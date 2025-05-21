@@ -22,20 +22,15 @@ li {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  justify-content: center;
+  align-items: center;
   padding: 0px 10px;
-  gap: 24px;
+  gap: 20px;
   max-width: 1148px;
 }
 
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  list-style: none;
-  padding: 0;
-}
-
 .gallery-item {
+  max-width: 360px;
   flex-basis: calc(33.333% - 10px);
 }
 
