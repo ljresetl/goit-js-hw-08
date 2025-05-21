@@ -47,9 +47,6 @@ const images = [
 ];
 
 const gallery = document.querySelector('.gallery');
-const modal = document.querySelector('.modal');
-const modalImage = document.querySelector('.modal-image');
-const overlay = document.querySelector('.overlay');
 
 // Створюємо розмітку галереї
 const markup = images
@@ -70,22 +67,18 @@ const markup = images
 
 gallery.innerHTML = markup;
 
-// Відкриття зображення у модалці
+// Відкриваємо зображення через basicLightbox
 gallery.addEventListener('click', (event) => {
   event.preventDefault();
-  const clickedImage = event.target;
-  if (clickedImage.nodeName !== 'IMG') return;
 
-  modalImage.src = clickedImage.dataset.source;
-  overlay.classList.add('active');    // показуємо оверлей з фоном
-  modal.classList.remove('hidden');   // показуємо модалку
-});
+  if (event.target.nodeName !== 'IMG') return;
 
-// Закриття модалки при кліку на оверлей (поза межами модалки)
-overlay.addEventListener('click', (event) => {
-  if (event.target === overlay) {
-    overlay.classList.remove('active');
-    modal.classList.add('hidden');
-    modalImage.src = '';
-  }
+  const largeImageURL = event.target.dataset.source;
+  const altText = event.target.alt;
+
+  const instance = basicLightbox.create(`
+    <img src="${largeImageURL}" alt="${altText}" />
+  `);
+
+  instance.show();
 });
